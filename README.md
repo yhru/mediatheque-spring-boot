@@ -16,7 +16,7 @@ Réalisation d’une application permettant de gérer une bibliothéque d’imag
 - je souhaite que l'application m'indique :  
 	- La présence d'individus  
 	- La liste des objets présents sur la photo avec la probablité de présence  
-	- la réalisation de différents images en différents formats à partir de l'image originelle (507*338, 725*483, 2122*1415, 4050*2700)  
+	- la réalisation de différents images en différents formats à partir de l'image originelle (507 * 338, 725 * 483, 2122 * 1415, 4050 * 2700)  
 
 ### En tant que Gestionnaire, suite au dépot d'une image et lorsque des individus sont detectés : 
 - je souhaite indiquer la date de l'accord de la publication de l'image par les personnes présentes sur l'image  
