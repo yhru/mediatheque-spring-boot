@@ -1,4 +1,4 @@
-package JEEMediatheque.Mediatheque;
+package JEEMediatheque;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
