@@ -20,7 +20,7 @@ public class MediathequeApplication {
 			Photo premierTestFromIntelliJ = new Photo(
 					"TestName2",
 					"TestResolution2",
-					"TestDataInPicture2"
+					"TestDataInPicture3"
 			);
 			photoRepository.save(premierTestFromIntelliJ);
 		};
