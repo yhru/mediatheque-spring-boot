@@ -8,16 +8,7 @@ public class Photo {
 
     //Création des properties
     @Id
-    @SequenceGenerator(
-            name = "photo_sequence",
-            sequenceName = "photo_sequence",
-            // incrémentation de 1 à chaque tour
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "photo_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(
             name = "id",
             updatable = false
@@ -44,7 +35,6 @@ public class Photo {
 
     //Constructeur
     public Photo(String name, String resolution, String dataInPicture) {
-        //this.id = id;
         this.name = name;
         this.resolution = resolution;
         this.dataInPicture = dataInPicture;
@@ -98,4 +88,5 @@ public class Photo {
                 ", dataInPicture='" + dataInPicture + '\'' +
                 '}';
     }
+
 }

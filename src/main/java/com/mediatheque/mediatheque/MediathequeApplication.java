@@ -16,26 +16,4 @@ public class MediathequeApplication {
 		SpringApplication.run(MediathequeApplication.class, args);
 	}
 
-//	@Bean
-//	CommandLineRunner commandLineRunner(PhotoRepository photoRepository){
-//		return args -> {
-//			Photo premierTestFromIntelliJ = new Photo(
-//					"TestName2",
-//					"TestResolution2",
-//					"TestDataInPicture3"
-//			);
-//			photoRepository.save(premierTestFromIntelliJ);
-//		};
-//	}
-
-	@Bean
-	CommandLineRunner commandLineRunner(UserRepository userRepository){
-		return args -> {
-			User addUser = new User(
-					"Michel",
-					true
-			);
-			userRepository.save(addUser);
-		};
-	}
 }
