@@ -1,5 +1,7 @@
 package com.mediatheque.mediatheque.entities;
 
+import ai.djl.modality.cv.output.DetectedObjects;
+
 import javax.persistence.*;
 
 @Entity(name = "Photo") // on map notre class pour dire que c'est une entité
@@ -34,7 +36,10 @@ public class Photo {
     private String dataInPicture;
 
     //Constructeur
-    public Photo(String name, String resolution, String dataInPicture) {
+
+
+    public Photo(Long id, String name, String resolution, String dataInPicture) {
+        this.id = id;
         this.name = name;
         this.resolution = resolution;
         this.dataInPicture = dataInPicture;
@@ -43,8 +48,16 @@ public class Photo {
     public Photo() {
     }
 
+    public Photo(String name, String resolution, String dataInPicture) {
+//        this.id = id;
+        this.name = name;
+        this.resolution = resolution;
+        this.dataInPicture = dataInPicture;
+    }
+
 
     //Getter & Setter
+
     public Long getId() {
         return id;
     }
@@ -79,14 +92,14 @@ public class Photo {
 
     //ToString
 
+
     @Override
     public String toString() {
         return "Photo{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", resolution='" + resolution + '\'' +
-                ", dataInPicture='" + dataInPicture + '\'' +
+                ", dataInPicture=" + dataInPicture +
                 '}';
     }
-
 }
