@@ -79,7 +79,7 @@ public final class ObjectDetection {
     }
 
     @GetMapping(
-            value = "/test",
+            value = "/test"
     )
     public @ResponseBody
     String getDetectedObject() throws IOException, ModelException, TranslateException {

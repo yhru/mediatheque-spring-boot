@@ -21,7 +21,7 @@ public class Photo {
             name = "name",
             columnDefinition = "TEXT"
     )
-    private String name;
+    private String file_name;
     //------------------------------------------//
     @Column(
             name = "resolution",
@@ -36,11 +36,16 @@ public class Photo {
     private String dataInPicture;
 
     //Constructeur
+<<<<<<< HEAD
 
 
     public Photo(Long id, String name, String resolution, String dataInPicture) {
         this.id = id;
         this.name = name;
+=======
+    public Photo(String name, String resolution, String dataInPicture) {
+        this.file_name = name;
+>>>>>>> 3f668d70c7465dc5c777237653227ae6abf5a2fb
         this.resolution = resolution;
         this.dataInPicture = dataInPicture;
     }
@@ -66,12 +71,12 @@ public class Photo {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFile_name() {
+        return file_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFile_name(String name) {
+        this.file_name = name;
     }
 
     public String getResolution() {
@@ -97,7 +102,7 @@ public class Photo {
     public String toString() {
         return "Photo{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + file_name + '\'' +
                 ", resolution='" + resolution + '\'' +
                 ", dataInPicture=" + dataInPicture +
                 '}';
