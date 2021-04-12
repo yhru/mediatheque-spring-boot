@@ -3,6 +3,7 @@ package com.mediatheque.mediatheque.DJL;
 import ai.djl.Application;
 import ai.djl.ModelException;
 import ai.djl.inference.Predictor;
+import ai.djl.modality.Classifications;
 import ai.djl.modality.cv.Image;
 import ai.djl.modality.cv.ImageFactory;
 import ai.djl.modality.cv.output.DetectedObjects;
@@ -11,36 +12,32 @@ import ai.djl.repository.zoo.ModelZoo;
 import ai.djl.repository.zoo.ZooModel;
 import ai.djl.training.util.ProgressBar;
 import ai.djl.translate.TranslateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 public final class ObjectDetection {
 
-    @PostMapping(value = "/upload", produces = MediaType.IMAGE_PNG_VALUE)
-    public DetectedObjects diagnose(@RequestParam("file") MultipartFile file) throws ModelException, TranslateException, IOException {
-        byte[] bytes = file.getBytes();
-        Path imageFile = Paths.get(file.getOriginalFilename());
-        Files.write(imageFile, bytes);
-        return predict(imageFile);
-    }
+//    @PostMapping(value = "/upload", produces = MediaType.IMAGE_PNG_VALUE)
+//    public DetectedObjects diagnose(@RequestParam("file") MultipartFile file) throws ModelException, TranslateException, IOException {
+//        byte[] bytes = file.getBytes();
+//        Path imageFile = Paths.get(file.getOriginalFilename());
+//        Files.write(imageFile, bytes);
+//        return predict(imageFile);
+//    }
 
     private static final Logger logger = LoggerFactory.getLogger(ObjectDetection.class);
 
-    private ObjectDetection() {}
-
-//    public static String main(String[] args) throws IOException, ModelException, TranslateException {
-//        DetectedObjects detection = ObjectDetection.predict();
-//        logger.info("{}", detection);
-//        return detection.toString();
-//    }
+    private ObjectDetection() {
+    }
 
     public static DetectedObjects predict(Path imageFile) throws IOException, ModelException, TranslateException {
 
@@ -58,10 +55,11 @@ public final class ObjectDetection {
             try (Predictor<Image, DetectedObjects> predictor = model.newPredictor()) {
                 DetectedObjects detection = predictor.predict(img);
                 saveBoundingBoxImage(img, detection);
-                return detection;
+                return (detection);
             }
         }
     }
+
 
     private static void saveBoundingBoxImage(Image img, DetectedObjects detection)
             throws IOException {
@@ -78,12 +76,19 @@ public final class ObjectDetection {
         logger.info("Detected objects image has been saved in: {}", imagePath);
     }
 
-    @GetMapping(
-            value = "/test"
-    )
+    @GetMapping(value = "/objectDetected")
     public @ResponseBody
     String getDetectedObject() throws IOException, ModelException, TranslateException {
-        Path imageToAnalyze = Paths.get("src/test/resources/car.jpg");
-        return predict(imageToAnalyze).toString();
+        Path imageToAnalyze = Paths.get("src/test/resources/test11.jpg");
+        DetectedObjects detectionObject = predict(imageToAnalyze);
+        System.out.println(detectionObject.items());
+        for (int index = 0; index < 10; index++) {
+            Classifications.Classification object = detectionObject.item(index);
+            return object.getClassName();
+        }
+
+        return null;
     }
+
+
 }
