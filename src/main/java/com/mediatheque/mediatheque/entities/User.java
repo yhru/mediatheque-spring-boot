@@ -30,7 +30,6 @@ public class User {
     //Constructeur
 
     public User(String name, boolean isAdmin) {
-//        this.id = id;
         this.name = name;
         this.isAdmin = isAdmin;
     }
