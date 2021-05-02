@@ -1,7 +1,14 @@
 package com.mediatheque.mediatheque.entities;
 
+import ai.djl.modality.cv.output.DetectedObjects;
+import com.fasterxml.jackson.annotation.JsonView;
+import net.minidev.json.JSONArray;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 @Entity(name = "Photo") // on map notre class pour dire que c'est une entité
 @Table(name = "photo")
@@ -23,16 +30,15 @@ public class Photo {
     private String name;
     //------------------------------------------//
     @Column(
-            name = "resolution",
-            columnDefinition = "TEXT"
+            name = "resolution"
     )
-    private String resolution;
+    private long resolution;
     //------------------------------------------//
+    @ElementCollection
     @Column(
-            name = "data_in_picture",
-            columnDefinition = "TEXT"
+            name = "data_in_picture"
     )
-    private String dataInPicture;
+    private Map<Integer, String> dataInPicture;
     //------------------------------------------//
     @Lob
     @Column(
@@ -43,7 +49,7 @@ public class Photo {
 
 
     //Constructeur
-    public Photo(String name, String resolution, String dataInPicture, byte[] image) {
+    public Photo(String name, long resolution, Map<Integer, String>dataInPicture, byte[] image) {
         this.name = name;
         this.resolution = resolution;
         this.dataInPicture = dataInPicture;
@@ -55,6 +61,7 @@ public class Photo {
 
 
     //Getter & Setter
+
     public Long getId() {
         return id;
     }
@@ -71,19 +78,19 @@ public class Photo {
         this.name = name;
     }
 
-    public String getResolution() {
+    public long getResolution() {
         return resolution;
     }
 
-    public void setResolution(String resolution) {
+    public void setResolution(long resolution) {
         this.resolution = resolution;
     }
 
-    public String getDataInPicture() {
+    public Map<Integer, String> getDataInPicture() {
         return dataInPicture;
     }
 
-    public void setDataInPicture(String dataInPicture) {
+    public void setDataInPicture(Map<Integer, String> dataInPicture) {
         this.dataInPicture = dataInPicture;
     }
 
@@ -95,14 +102,15 @@ public class Photo {
         this.image = image;
     }
 
+
     //ToString
     @Override
     public String toString() {
         return "Photo{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", resolution='" + resolution + '\'' +
-                ", dataInPicture='" + dataInPicture + '\'' +
+                ", resolution=" + resolution +
+                ", dataInPicture=" + dataInPicture +
                 ", image=" + Arrays.toString(image) +
                 '}';
     }

@@ -14,25 +14,17 @@ import ai.djl.training.util.ProgressBar;
 import ai.djl.translate.TranslateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public final class ObjectDetection {
-
-//    @PostMapping(value = "/upload", produces = MediaType.IMAGE_PNG_VALUE)
-//    public DetectedObjects diagnose(@RequestParam("file") MultipartFile file) throws ModelException, TranslateException, IOException {
-//        byte[] bytes = file.getBytes();
-//        Path imageFile = Paths.get(file.getOriginalFilename());
-//        Files.write(imageFile, bytes);
-//        return predict(imageFile);
-//    }
 
     private static final Logger logger = LoggerFactory.getLogger(ObjectDetection.class);
 
@@ -60,35 +52,30 @@ public final class ObjectDetection {
         }
     }
 
-
     private static void saveBoundingBoxImage(Image img, DetectedObjects detection)
             throws IOException {
         Path outputDir = Paths.get("build/output");
         Files.createDirectories(outputDir);
 
-        // Make image copy with alpha channel because original image was jpg
         Image newImage = img.duplicate(Image.Type.TYPE_INT_ARGB);
         newImage.drawBoundingBoxes(detection);
 
         Path imagePath = outputDir.resolve("detected-objects.png");
-        // OpenJDK can't save jpg with alpha channel
         newImage.save(Files.newOutputStream(imagePath), "png");
         logger.info("Detected objects image has been saved in: {}", imagePath);
     }
 
-    @GetMapping(value = "/objectDetected")
-    public @ResponseBody
-    String getDetectedObject() throws IOException, ModelException, TranslateException {
-        Path imageToAnalyze = Paths.get("src/test/resources/test11.jpg");
-        DetectedObjects detectionObject = predict(imageToAnalyze);
+
+    public static Map<Integer, String> getDetectedObject(Path imageFile) throws IOException, ModelException, TranslateException {
+        Map<Integer, String> objectsDetected = new HashMap<>();
+        DetectedObjects detectionObject = predict(imageFile);
         System.out.println(detectionObject.items());
-        for (int index = 0; index < 10; index++) {
+        for (int index = 0; index < detectionObject.getNumberOfObjects(); index++) {
             Classifications.Classification object = detectionObject.item(index);
-            return object.getClassName();
+            if (!objectsDetected.containsValue(object.getClassName()) && !objectsDetected.containsKey(index)) {
+                objectsDetected.put(index, object.getClassName());
+            }
         }
-
-        return null;
+        return objectsDetected;
     }
-
-
 }
