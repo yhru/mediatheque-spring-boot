@@ -1,6 +1,7 @@
 package com.mediatheque.mediatheque.entities;
 
 import javax.persistence.*;
+import java.util.Arrays;
 
 @Entity(name = "Photo") // on map notre class pour dire que c'est une entité
 @Table(name = "photo")
@@ -19,7 +20,7 @@ public class Photo {
             name = "name",
             columnDefinition = "TEXT"
     )
-    private String file_name;
+    private String name;
     //------------------------------------------//
     @Column(
             name = "resolution",
@@ -32,12 +33,21 @@ public class Photo {
             columnDefinition = "TEXT"
     )
     private String dataInPicture;
+    //------------------------------------------//
+    @Lob
+    @Column(
+            name = "image",
+            length = 1000
+    )
+    private byte[] image;
+
 
     //Constructeur
-    public Photo(String name, String resolution, String dataInPicture) {
-        this.file_name = name;
+    public Photo(String name, String resolution, String dataInPicture, byte[] image) {
+        this.name = name;
         this.resolution = resolution;
         this.dataInPicture = dataInPicture;
+        this.image = image;
     }
 
     public Photo() {
@@ -53,12 +63,12 @@ public class Photo {
         this.id = id;
     }
 
-    public String getFile_name() {
-        return file_name;
+    public String getName() {
+        return name;
     }
 
-    public void setFile_name(String name) {
-        this.file_name = name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getResolution() {
@@ -77,16 +87,23 @@ public class Photo {
         this.dataInPicture = dataInPicture;
     }
 
-    //ToString
+    public byte[] getImage() {
+        return image;
+    }
 
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    //ToString
     @Override
     public String toString() {
         return "Photo{" +
                 "id=" + id +
-                ", name='" + file_name + '\'' +
+                ", name='" + name + '\'' +
                 ", resolution='" + resolution + '\'' +
                 ", dataInPicture='" + dataInPicture + '\'' +
+                ", image=" + Arrays.toString(image) +
                 '}';
     }
-
 }
