@@ -1,8 +1,6 @@
 package com.mediatheque.mediatheque.config;
 
-import com.mediatheque.mediatheque.entities.Photo;
 import com.mediatheque.mediatheque.entities.User;
-import com.mediatheque.mediatheque.repositories.PhotoRepository;
 import com.mediatheque.mediatheque.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;

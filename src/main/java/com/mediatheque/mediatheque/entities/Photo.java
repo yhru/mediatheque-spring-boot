@@ -1,13 +1,8 @@
 package com.mediatheque.mediatheque.entities;
 
-import ai.djl.modality.cv.output.DetectedObjects;
-import com.fasterxml.jackson.annotation.JsonView;
-import net.minidev.json.JSONArray;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 @Entity(name = "Photo") // on map notre class pour dire que c'est une entité

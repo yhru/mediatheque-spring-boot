@@ -4,15 +4,8 @@ import com.mediatheque.mediatheque.entities.Photo;
 import com.mediatheque.mediatheque.repositories.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.Base64;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class PhotoService {
