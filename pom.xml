@@ -52,26 +52,22 @@
 			<artifactId>api</artifactId>
 			<version>${djl.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>ai.djl</groupId>
 			<artifactId>model-zoo</artifactId>
 			<version>${djl.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>ai.djl.mxnet</groupId>
 			<artifactId>mxnet-model-zoo</artifactId>
 			<version>${djl.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>ai.djl.mxnet</groupId>
 			<artifactId>mxnet-engine</artifactId>
 			<version>${djl.version}</version>
 			<scope>runtime</scope>
 		</dependency>
-
 		<dependency>
 			<!--
                 See https://github.com/awslabs/djl/blob/master/mxnet/mxnet-engine/README.md for more MXNet library selection options
@@ -81,7 +77,6 @@
 			<version>1.7.0-backport</version>
 			<scope>runtime</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
