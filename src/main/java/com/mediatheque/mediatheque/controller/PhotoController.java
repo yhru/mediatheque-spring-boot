@@ -15,12 +15,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -76,12 +76,20 @@ public class PhotoController {
             byte[] imgBytes = image.getBytes();
             Path imgPath = Paths.get(image.getOriginalFilename());
             Files.write(imgPath, imgBytes);
-            byte[] imageCopyrighted = AddTextWatermark.addWatermark( image.getInputStream(), imgPath.toString());
+            byte[] imageCopyrighted = AddTextWatermark.addWatermark(image.getInputStream(), imgPath.toString());
             Photo photo = new Photo(image.getOriginalFilename(), image.getSize(), ObjectDetection.getDetectedObject(imgPath), imageCopyrighted);
             photoRepository.save(photo);
         } catch (IOException | ModelException | TranslateException e) {
             e.printStackTrace();
         }
+    }
+
+    @GetMapping("/datas/{id}")
+    public ResponseEntity<?> fetchDatasInPicture(@PathVariable Long id) throws IOException {
+        Map<Integer, String> dataInPicture = photoRepository.findById(id).get().getDataInPicture();
+        return ResponseEntity
+                .ok()
+                .body(dataInPicture);
     }
 }
 
