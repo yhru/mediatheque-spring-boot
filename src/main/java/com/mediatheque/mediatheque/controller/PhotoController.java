@@ -79,6 +79,7 @@ public class PhotoController {
             byte[] imageCopyrighted = AddTextWatermark.addWatermark(image.getInputStream(), imgPath.toString());
             Photo photo = new Photo(image.getOriginalFilename(), image.getSize(), ObjectDetection.getDetectedObject(imgPath), imageCopyrighted);
             photoRepository.save(photo);
+            Files.deleteIfExists(imgPath);
         } catch (IOException | ModelException | TranslateException e) {
             e.printStackTrace();
         }
