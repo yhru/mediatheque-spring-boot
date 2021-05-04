@@ -17,7 +17,7 @@ public class PhotoService {
         this.photoRepository = photoRepository;
     }
 
-    public List<Photo> getPhoto(){
+    public List<Photo> getPhoto() {
         return photoRepository.findAll();
     }
 
@@ -25,7 +25,4 @@ public class PhotoService {
         System.out.println(photo);
         return photoRepository.saveAndFlush(photo);
     }
-
-
-
 }

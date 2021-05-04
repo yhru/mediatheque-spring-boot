@@ -3,6 +3,7 @@ package com.mediatheque.mediatheque.entities;
 
 import javax.persistence.*;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Map;
 
 @Entity(name = "Photo") // on map notre class pour dire que c'est une entité
@@ -41,10 +42,15 @@ public class Photo {
             length = 1000
     )
     private byte[] image;
+    //------------------------------------------//
+    @Column(
+            name = "agreementDate"
+    )
+    private Date agreementDate;
 
 
     //Constructeur
-    public Photo(String name, long resolution, Map<Integer, String>dataInPicture, byte[] image) {
+    public Photo(String name, long resolution, Map<Integer, String> dataInPicture, byte[] image) {
         this.name = name;
         this.resolution = resolution;
         this.dataInPicture = dataInPicture;
@@ -97,6 +103,13 @@ public class Photo {
         this.image = image;
     }
 
+    public Date getAgreementDate() {
+        return agreementDate;
+    }
+
+    public void setAgreementDate(Date agreementDate) {
+        this.agreementDate = agreementDate;
+    }
 
     //ToString
     @Override
@@ -107,6 +120,7 @@ public class Photo {
                 ", resolution=" + resolution +
                 ", dataInPicture=" + dataInPicture +
                 ", image=" + Arrays.toString(image) +
+                ", agreementDate=" + agreementDate +
                 '}';
     }
 }
