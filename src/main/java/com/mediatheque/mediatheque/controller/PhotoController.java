@@ -95,7 +95,7 @@ public class PhotoController {
 
     @GetMapping("/datas/{id}")
     public ResponseEntity<?> fetchDatasInPicture(@PathVariable Long id) {
-        Map<Integer, String> dataInPicture = getPhotoById(id).getDataInPicture();
+        Map<String, Double> dataInPicture = getPhotoById(id).getDataInPicture();
         return ResponseEntity
                 .ok()
                 .body(dataInPicture);

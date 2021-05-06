@@ -34,7 +34,7 @@ public class Photo {
     @Column(
             name = "data_in_picture"
     )
-    private Map<Integer, String> dataInPicture;
+    private Map<String, Double> dataInPicture;
     //------------------------------------------//
     @Lob
     @Column(
@@ -50,7 +50,7 @@ public class Photo {
 
 
     //Constructeur
-    public Photo(String name, long resolution, Map<Integer, String> dataInPicture, byte[] image) {
+    public Photo(String name, long resolution, Map<String, Double> dataInPicture, byte[] image) {
         this.name = name;
         this.resolution = resolution;
         this.dataInPicture = dataInPicture;
@@ -87,11 +87,11 @@ public class Photo {
         this.resolution = resolution;
     }
 
-    public Map<Integer, String> getDataInPicture() {
+    public Map<String, Double> getDataInPicture() {
         return dataInPicture;
     }
 
-    public void setDataInPicture(Map<Integer, String> dataInPicture) {
+    public void setDataInPicture(Map<String, Double> dataInPicture) {
         this.dataInPicture = dataInPicture;
     }
 

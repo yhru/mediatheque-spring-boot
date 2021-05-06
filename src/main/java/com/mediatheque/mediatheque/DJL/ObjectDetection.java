@@ -66,16 +66,17 @@ public final class ObjectDetection {
     }
 
 
-    public static Map<Integer, String> getDetectedObject(Path imageFile) throws IOException, ModelException, TranslateException {
-        Map<Integer, String> objectsDetected = new HashMap<>();
+    public static Map<String, Double> getDetectedObject(Path imageFile) throws IOException, ModelException, TranslateException {
+        Map<String, Double> objectsDetected = new HashMap<>();
         DetectedObjects detectionObject = predict(imageFile);
         System.out.println(detectionObject.items());
         for (int index = 0; index < detectionObject.getNumberOfObjects(); index++) {
             Classifications.Classification object = detectionObject.item(index);
-            if (!objectsDetected.containsValue(object.getClassName()) && !objectsDetected.containsKey(index)) {
-                objectsDetected.put(index, object.getClassName());
+            if (!objectsDetected.containsKey(object.getClassName())) {
+                objectsDetected.put(object.getClassName(), object.getProbability());
             }
         }
+
         return objectsDetected;
     }
 }
