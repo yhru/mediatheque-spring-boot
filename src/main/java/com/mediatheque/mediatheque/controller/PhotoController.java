@@ -134,5 +134,13 @@ public class PhotoController {
         photo.setAgreementDate(date);
         photoRepository.save(photo);
     }
+
+    @GetMapping("/datas")
+    public ResponseEntity<?> searchDatas(@RequestParam String request) {
+        List<Map<String, Double>> name = photoRepository.findPhotoIdByDatas(request);
+        return ResponseEntity
+                .ok()
+                .body(name);
+    }
 }
 
