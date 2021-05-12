@@ -27,8 +27,8 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping(path = "api/v1/photo")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PhotoController {
 
     @Autowired
