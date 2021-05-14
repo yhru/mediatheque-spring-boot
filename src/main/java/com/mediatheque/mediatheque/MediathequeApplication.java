@@ -1,24 +1,14 @@
 package com.mediatheque.mediatheque;
 
-import ai.djl.ModelException;
-import ai.djl.translate.TranslateException;
-import com.mediatheque.mediatheque.DJL.ObjectDetection;
-import com.mediatheque.mediatheque.entities.Photo;
-import com.mediatheque.mediatheque.entities.User;
-import com.mediatheque.mediatheque.repositories.PhotoRepository;
-import com.mediatheque.mediatheque.repositories.UserRepository;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
-import java.io.IOException;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
+@EnableSwagger2
 public class MediathequeApplication {
 
-	public static void main(String[] args) throws ModelException, TranslateException, IOException {
+	public static void main(String[] args)  {
 		SpringApplication.run(MediathequeApplication.class, args);
 	}
-
 }
