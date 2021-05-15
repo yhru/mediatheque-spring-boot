@@ -8,6 +8,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -20,6 +23,11 @@ public class AppUserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return appUserRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
+    }
+
+    @GetMapping
+    public List<AppUser> getUser(){
+        return appUserRepository.findAll();
     }
 
     public String signUpUser(AppUser appUser){
