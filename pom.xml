@@ -15,7 +15,7 @@
 	<description>Mediatheque </description>
 	<properties>
 		<java.version>15</java.version>
-		<djl.version>0.28.0</djl.version>
+		<djl.version>0.31.1</djl.version>
 	</properties>
 	<dependencies>
 		<dependency>
